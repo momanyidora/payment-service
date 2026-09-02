@@ -1,0 +1,32 @@
+{
+  "name": "payment-service",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "vitest",
+    "test:run": "npm run vitest"
+
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momanyidora/payment-service.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/momanyidora/payment-service/issues"
+  },
+  "homepage": "https://github.com/momanyidora/payment-service#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "vitest": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "^26.4.1",
+    "tsx": "^4.23.13",
+    "typescript": "^7.0.2"
+  }
+}
