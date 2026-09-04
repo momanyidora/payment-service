@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest",
-    "test:run": "npm run vitest"
-
+    "test:run": "npm run vitest",
+    "contract:emit": "prisma contract emit"
   },
   "repository": {
     "type": "git",
@@ -21,11 +21,15 @@
   },
   "homepage": "https://github.com/momanyidora/payment-service#readme",
   "dependencies": {
+    "@prisma/orm-postgres": "^8.0.0-rc.8",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "vitest": "^4.1.11"
   },
   "devDependencies": {
+    "@prisma/cli-engine": "^0.2.3",
     "@types/node": "^26.4.1",
+    "prisma": "^8.0.0-rc.10",
     "tsx": "^4.23.13",
     "typescript": "^7.0.2"
   }

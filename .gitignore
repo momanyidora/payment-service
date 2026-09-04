@@ -5,3 +5,5 @@ package-lock.json
 .claude
 .agents
 .env
+node_modules/
+dist/
