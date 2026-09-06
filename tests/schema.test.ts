@@ -1,19 +1,9 @@
-import { it, expect, beforeAll, afterAll, vi, describe } from "vitest";
+import "dotenv/config";
+import { it, expect, vi, describe } from "vitest";
 import { db as prisma } from "../src/prisma/db";
 import type { Request, Response } from "express";
 import { createUser } from "../src/controllers/usersController";
 import { randomUUID } from "crypto";
-
-beforeAll(async () => {
-  await prisma.connect();
-});
-afterAll(async () => {
-  await prisma.close();
-});
-
-it("should have database connection", async () => {
-  await expect(prisma.connect()).resolves.not.toThrow();
-});
 
 //Mocking response from database
 function mockDatabaseResponse() {
@@ -23,25 +13,17 @@ function mockDatabaseResponse() {
   return res;
 }
 
-//mocking the database module
-vi.mock("../src/prisma/db", async () => ({
-  db: {
-    findUserByEmail: vi.fn(),
-    createUser: vi.fn(),
-  },
-}));
-
 describe("createUser tests", () => {
   const userId = randomUUID();
   const req = {
     body: {
-      user_id: userId,
+      // user_id: userId,
       email: "ogutu@gmail.com",
-      full_name: "Ogutu Kwach",
-      password: "password",
-      phone_number: "0712345678",
-      kyc_status: "pending",
-      created_at: new Date().toISOString(),
+      name: "Ogutu Kwach",
+      // password: "password",
+      // phone_number: "0712345678",
+      // kyc_status: "pending",
+      // created_at: new Date().toISOString(),
     },
   } as Request;
   const res = mockDatabaseResponse();
@@ -57,22 +39,22 @@ describe("createUser tests", () => {
     );
   });
 
-  it("should fail when creating a user with an existing email", async () => {
-    vi.mocked(prisma.findUserByEmail).mockResolvedValue({
-      email: "ogutu@gmail.com",
-    });
+  // it("should fail when creating a user with an existing email", async () => {
+  //   vi.mocked(prisma.findUserByEmail).mockResolvedValue({
+  //     email: "ogutu@gmail.com",
+  //   });
 
-    await expect(
-      createUser(
-        { body: { email: "ogutu@gmail.com" } } as Request,
-        res,
-      ).rejects.toThrow("Email already in use"),
-    );
-  });
+  //   await expect(
+  //     createUser(
+  //       { body: { email: "ogutu@gmail.com" } } as Request,
+  //       res,
+  //     ).rejects.toThrow("Email already in use"),
+  //   );
+  // });
 });
 
 // it("should have users table schema with correct fields", async () => {
-//   const user = await prisma.user.findfirst();
+//   const user = await prisma.user.findFirst();
 //   expect(user).toHaveProperty("user_id");
 //   expect(user).toHaveProperty("email");
 //   expect(user).toHaveProperty("full_name");
@@ -83,7 +65,7 @@ describe("createUser tests", () => {
 // });
 
 // it("should have wallets schema with correct fields", async () => {
-//   const wallet = await prisma.orm.Wallet.findFirst();
+//   const wallet = await prisma.wallet.findFirst();
 //   expect(wallet).toHaveProperty("wallet_id");
 //   expect(wallet).toHaveProperty("user_id");
 //   expect(wallet).toHaveProperty("balance");

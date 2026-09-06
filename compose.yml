@@ -1,0 +1,22 @@
+services:
+  payment-service:
+    build:
+      context: ./postgres
+      dockerfile: Dockerfile
+    container_name: payment_postgres
+    environment:
+      POSTGRES_DB: payments
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - '5436:5432'
+    # volumes:
+    #   - postgres-data:/var/lib/postgresql/data
+    networks:
+      - payment_network
+
+networks:
+  payment_network: {}
+
+# volumes:
+#   postgres-data:
