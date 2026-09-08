@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "vitest",
-    "test:run": "npm run vitest",
+    "test:run": "vitest run",
     "contract:emit": "prisma contract emit"
   },
   "repository": {
